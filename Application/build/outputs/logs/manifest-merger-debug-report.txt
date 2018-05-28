@@ -1,0 +1,121 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:20:1-53:12
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:20:1-53:12
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:20:1-53:12
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\6ed33a1bb28dc501d0528ad69152cacd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\0c6c2bea334ed7a1c7a806eed6c89ea8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\3b5dacb090e92e245557af1c0852057c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\35427e4e1ef589846463cb2cef23f070\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\8d5843b36e413a31df80db9a362a4447\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\fb43254af6690648af54409a6b278beb\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\7ae7aa8fa4c96c841e88b82e5c23075f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\62d3b37650bf104dbd85fc93e6e64d81\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\2284e2cd721022684c8444a2336af8cd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\1b5052669f67206a6bef0cad0456459b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\4c3df20392fb8c0f616895c93faa83d5\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\042f8c8f690d0d577ab12f7863d009c6\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:20:1-53:12
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:20:1-53:12
+	package
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:21:5-50
+	android:versionName
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:23:5-30
+		INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:20:11-69
+	android:versionCode
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:22:5-28
+		INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+uses-feature#android.hardware.bluetooth_le
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:31:5-89
+	android:required
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:31:64-87
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:31:19-63
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:33:5-67
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:33:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:34:5-73
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:34:22-71
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:37:5-81
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:37:22-78
+application
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:39:5-51:19
+	android:label
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:39:18-50
+	android:icon
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:40:9-45
+	android:theme
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:41:9-56
+activity#com.example.android.bluetoothlegatt.DeviceScanActivity
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:42:9-48:20
+	android:label
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:43:13-45
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:42:19-53
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:44:13-47:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:45:17-68
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:45:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:46:17-76
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:46:27-74
+activity#com.example.android.bluetoothlegatt.DeviceControlActivity
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:49:9-58
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:49:19-56
+service#com.example.android.bluetoothlegatt.BluetoothLeService
+ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:50:9-77
+	android:enabled
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:50:53-75
+	android:name
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml:50:18-52
+uses-sdk
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\6ed33a1bb28dc501d0528ad69152cacd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v13:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-v13-27.0.2.aar\6ed33a1bb28dc501d0528ad69152cacd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\0c6c2bea334ed7a1c7a806eed6c89ea8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-v4-27.0.2.aar\0c6c2bea334ed7a1c7a806eed6c89ea8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\3b5dacb090e92e245557af1c0852057c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.0.2.aar\3b5dacb090e92e245557af1c0852057c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\35427e4e1ef589846463cb2cef23f070\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\35427e4e1ef589846463cb2cef23f070\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\8d5843b36e413a31df80db9a362a4447\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.0.2.aar\8d5843b36e413a31df80db9a362a4447\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\fb43254af6690648af54409a6b278beb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-fragment-27.0.2.aar\fb43254af6690648af54409a6b278beb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\7ae7aa8fa4c96c841e88b82e5c23075f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.0.2.aar\7ae7aa8fa4c96c841e88b82e5c23075f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\62d3b37650bf104dbd85fc93e6e64d81\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.0.2.aar\62d3b37650bf104dbd85fc93e6e64d81\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\2284e2cd721022684c8444a2336af8cd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.0.2.aar\2284e2cd721022684c8444a2336af8cd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\1b5052669f67206a6bef0cad0456459b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.0.2.aar\1b5052669f67206a6bef0cad0456459b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\4c3df20392fb8c0f616895c93faa83d5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.0.2] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\support-compat-27.0.2.aar\4c3df20392fb8c0f616895c93faa83d5\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\042f8c8f690d0d577ab12f7863d009c6\AndroidManifest.xml:20:5-22:41
+MERGED from [android.arch.lifecycle:runtime:1.0.3] C:\Users\hekd\.gradle\caches\transforms-1\files-1.1\runtime-1.0.3.aar\042f8c8f690d0d577ab12f7863d009c6\AndroidManifest.xml:20:5-22:41
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+		ADDED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\hekd\Downloads\android-BluetoothLeGatt-master\Application\src\main\AndroidManifest.xml
