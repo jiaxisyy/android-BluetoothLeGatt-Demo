@@ -144,7 +144,7 @@ public class BluetoothLeService extends Service {
             final byte[] data = characteristic.getValue();
             if (data != null && data.length > 0) {
                 final StringBuilder stringBuilder = new StringBuilder(data.length);
-                for(byte byteChar : data)
+                for (byte byteChar : data)
                     stringBuilder.append(String.format("%02X ", byteChar));
                 intent.putExtra(EXTRA_DATA, new String(data) + "\n" + stringBuilder.toString());
             }
@@ -203,11 +203,10 @@ public class BluetoothLeService extends Service {
      * Connects to the GATT server hosted on the Bluetooth LE device.
      *
      * @param address The device address of the destination device.
-     *
      * @return Return true if the connection is initiated successfully. The connection result
-     *         is reported asynchronously through the
-     *         {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
-     *         callback.
+     * is reported asynchronously through the
+     * {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
+     * callback.
      */
     public boolean connect(final String address) {
         if (mBluetoothAdapter == null || address == null) {
@@ -286,7 +285,7 @@ public class BluetoothLeService extends Service {
      * Enables or disables notification on a give characteristic.
      *
      * @param characteristic Characteristic to act on.
-     * @param enabled If true, enable notification.  False otherwise.
+     * @param enabled        If true, enable notification.  False otherwise.
      */
     public void setCharacteristicNotification(BluetoothGattCharacteristic characteristic,
                                               boolean enabled) {
@@ -295,19 +294,19 @@ public class BluetoothLeService extends Service {
             return;
         }
         mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
-        byte[] bytes = new byte[1];
-        bytes[0] = 01;
-//        bytes[1] = 02;
-        characteristic.setValue(bytes);
-        characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
-        mBluetoothGatt.writeCharacteristic(characteristic);
         // This is specific to Heart Rate Measurement.
         if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
             BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
                     UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
             mBluetoothGatt.writeDescriptor(descriptor);
-
+        } else {
+            byte[] bytes = new byte[1];
+            bytes[0] = 01;
+//        bytes[1] = 02;
+            characteristic.setValue(bytes);
+            characteristic.setWriteType(BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE);
+            mBluetoothGatt.writeCharacteristic(characteristic);
         }
     }
 

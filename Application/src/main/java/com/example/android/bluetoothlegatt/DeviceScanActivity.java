@@ -33,13 +33,16 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,10 +51,14 @@ import java.util.ArrayList;
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  */
-public class DeviceScanActivity extends ListActivity {
-    /**蓝牙权限*/
+public class DeviceScanActivity extends Activity {
+    /**
+     * 蓝牙权限
+     */
     private static final int PERMISSIONS_BLE = 10010;
-    /**gps*/
+    /**
+     * gps
+     */
     private static final int PERMISSIONS_GPS = 10011;
 
     private LeDeviceListAdapter mLeDeviceListAdapter;
@@ -69,12 +76,25 @@ public class DeviceScanActivity extends ListActivity {
             Manifest.permission.BLUETOOTH_ADMIN,
             Manifest.permission.ACCESS_COARSE_LOCATION,
     };
+    private ListView mlvDevices;
+
+    private SeekBar mSbRssi;
+
+
+    /**
+     * 当前信号值的绝对值
+     */
+    private int mNowAbsRssi = 0;
+    private ArrayList<BluetoothDevice> cloneLeDevices;
+    private ArrayList<Integer> cloneRssies;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setTitle(R.string.title_devices);
         mHandler = new Handler();
+        setContentView(R.layout.main_activity);
+        initView();
 
 
         // Use this check to determine whether BLE is supported on the device.  Then you can
@@ -98,6 +118,60 @@ public class DeviceScanActivity extends ListActivity {
         }
     }
 
+    private void initView() {
+        mSbRssi = findViewById(R.id.sb_filterRssi);
+        final TextView filterRssi = findViewById(R.id.tv_filterRssi);
+        //默认100
+        mSbRssi.setProgress(100);
+        mSbRssi.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                filterRssi.setText("-" + i + " dBm");
+                mNowAbsRssi = i;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                filterRssi();
+
+            }
+        });
+    }
+
+    /**
+     * 过滤信号值
+     */
+    private void filterRssi() {
+        mNowAbsRssi=mSbRssi.getProgress();
+
+        if (!mScanning) {
+            mLeDevices.clear();
+            mRssies.clear();
+            mLeDeviceListAdapter.notifyDataSetChanged();
+        }
+        Log.d("TAG","======3======");
+        if(cloneLeDevices!=null){
+            Log.d("TAG","======1======");
+            for (int i = 0; i < cloneRssies.size(); i++) {
+                Integer filterRssi = cloneRssies.get(i);
+                Log.d("TAG","======2======");
+                if (Math.abs(filterRssi) < mNowAbsRssi && !mScanning) {
+                    Log.d("TAG",filterRssi+"============");
+                    mLeDeviceListAdapter.addDevice(cloneLeDevices.get(i), filterRssi);
+                    mLeDeviceListAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,6 +185,7 @@ public class DeviceScanActivity extends ListActivity {
             menu.findItem(R.id.menu_scan).setVisible(false);
             menu.findItem(R.id.menu_refresh).setActionView(
                     R.layout.actionbar_indeterminate_progress);
+
         }
         return true;
     }
@@ -132,7 +207,6 @@ public class DeviceScanActivity extends ListActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         // Ensures Bluetooth is enabled on the device.  If Bluetooth is not currently enabled,
         // fire an intent to display a dialog asking the user to grant permission to enable it.
         if (!mBluetoothAdapter.isEnabled()) {
@@ -149,8 +223,26 @@ public class DeviceScanActivity extends ListActivity {
 
         // Initializes list view adapter.
         mLeDeviceListAdapter = new LeDeviceListAdapter();
-        setListAdapter(mLeDeviceListAdapter);
+        mlvDevices = findViewById(R.id.lv_devices);
+        mlvDevices.setAdapter(mLeDeviceListAdapter);
+        mlvDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                final BluetoothDevice device = mLeDeviceListAdapter.getDevice(i);
+                if (device == null) return;
+                final Intent intent = new Intent(DeviceScanActivity.this, DeviceControlActivity.class);
+                intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
+                intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
+                if (mScanning) {
+                    mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                    mScanning = false;
+                }
+                startActivity(intent);
+            }
+        });
         scanLeDevice(true);
+        filterRssi();
     }
 
     @Override
@@ -218,7 +310,7 @@ public class DeviceScanActivity extends ListActivity {
         mLeDeviceListAdapter.clear();
     }
 
-    @Override
+/*    @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
         if (device == null) return;
@@ -230,7 +322,7 @@ public class DeviceScanActivity extends ListActivity {
             mScanning = false;
         }
         startActivity(intent);
-    }
+    }*/
 
     private void scanLeDevice(final boolean enable) {
         if (enable) {
@@ -253,21 +345,40 @@ public class DeviceScanActivity extends ListActivity {
         invalidateOptionsMenu();
     }
 
+    /**
+     * 信号值
+     */
+    private ArrayList<Integer> mRssies;
+    private ArrayList<BluetoothDevice> mLeDevices;
+
+    /**
+     * 筛选后信号值
+     */
+    private ArrayList<Integer> mFilterRssies;
+    private ArrayList<BluetoothDevice> mFilterLeDevices;
+
     // Adapter for holding devices found through scanning.
     private class LeDeviceListAdapter extends BaseAdapter {
-        private ArrayList<BluetoothDevice> mLeDevices;
+
+
         private LayoutInflater mInflator;
 
         public LeDeviceListAdapter() {
             super();
-            mLeDevices = new ArrayList<BluetoothDevice>();
+            mLeDevices = new ArrayList<>();
+            mRssies = new ArrayList<>();
+            //filter之后
+            mFilterRssies = new ArrayList<>();
+            mFilterLeDevices = new ArrayList<>();
             mInflator = DeviceScanActivity.this.getLayoutInflater();
+
         }
 
-        public void addDevice(BluetoothDevice device) {
+        public void addDevice(BluetoothDevice device, int rssi) {
             if (!mLeDevices.contains(device) && device.getName() != null) {
                 if (device.getName().equals("XTSH1")) {
                     mLeDevices.add(device);
+                    mRssies.add(rssi);
                 }
             }
         }
@@ -304,6 +415,7 @@ public class DeviceScanActivity extends ListActivity {
                 viewHolder = new ViewHolder();
                 viewHolder.deviceAddress = (TextView) view.findViewById(R.id.device_address);
                 viewHolder.deviceName = (TextView) view.findViewById(R.id.device_name);
+                viewHolder.deviceRssies = (TextView) view.findViewById(R.id.device_rssi);
 
                 view.setTag(viewHolder);
             } else {
@@ -319,6 +431,7 @@ public class DeviceScanActivity extends ListActivity {
             else
                 viewHolder.deviceName.setText(R.string.unknown_device);
             viewHolder.deviceAddress.setText(device.getAddress());
+            viewHolder.deviceRssies.setText(mRssies.get(i).toString() + " dBm");
 
             return view;
         }
@@ -329,13 +442,15 @@ public class DeviceScanActivity extends ListActivity {
             new BluetoothAdapter.LeScanCallback() {
 
                 @Override
-                public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+                public void onLeScan(final BluetoothDevice device, final int rssi, byte[] scanRecord) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
 
-                            mLeDeviceListAdapter.addDevice(device);
+                            mLeDeviceListAdapter.addDevice(device, rssi);
                             mLeDeviceListAdapter.notifyDataSetChanged();
+                            cloneLeDevices = new ArrayList<>(mLeDevices);
+                            cloneRssies = new ArrayList<>(mRssies);
 
                         }
                     });
@@ -345,5 +460,6 @@ public class DeviceScanActivity extends ListActivity {
     static class ViewHolder {
         TextView deviceName;
         TextView deviceAddress;
+        TextView deviceRssies;
     }
 }

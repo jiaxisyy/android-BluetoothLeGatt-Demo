@@ -51,6 +51,11 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
 
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
+    /**
+     * 是否手动关闭连接
+     */
+    public boolean isInitiativeStop = false;
+
 
     private TextView mConnectionState;
     private TextView mDataField;
@@ -59,6 +64,7 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
     private ExpandableListView mGattServicesList;
     private BluetoothLeService mBluetoothLeService;
     private Button btnFactoryTest;
+    private Button btnHeartRateTest;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics =
             new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
     private boolean mConnected = false;
@@ -105,7 +111,8 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
                 invalidateOptionsMenu();
-                clearUI();
+
+//                clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
@@ -129,7 +136,7 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
                                 mGattCharacteristics.get(groupPosition).get(childPosition);
                         final int charaProp = characteristic.getProperties();
 
-                        mBluetoothLeService.setCharacteristicNotification(characteristic,true);
+                        mBluetoothLeService.setCharacteristicNotification(characteristic, true);
 
                     /*    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
                             // If there is an active notification on a characteristic, clear
@@ -150,7 +157,7 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
                     }
                     return false;
                 }
-    };
+            };
 
     private void clearUI() {
         mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
@@ -177,8 +184,10 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        btnFactoryTest=findViewById(R.id.btn_factoryTest);
+        btnFactoryTest = findViewById(R.id.btn_factoryTest);
+        btnHeartRateTest = findViewById(R.id.btn_heartRateTest);
         btnFactoryTest.setOnClickListener(this);
+        btnHeartRateTest.setOnClickListener(this);
     }
 
     @Override
@@ -210,20 +219,32 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
         if (mConnected) {
             menu.findItem(R.id.menu_connect).setVisible(false);
             menu.findItem(R.id.menu_disconnect).setVisible(true);
+            menu.findItem(R.id.menu_refresh).setActionView(null);
         } else {
             menu.findItem(R.id.menu_connect).setVisible(true);
             menu.findItem(R.id.menu_disconnect).setVisible(false);
+
+            if (!isInitiativeStop) {
+                menu.findItem(R.id.menu_refresh).setActionView(
+                        R.layout.actionbar_indeterminate_progress);
+            }
+
         }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_connect:
+                //手动打开
+                isInitiativeStop = false;
+                invalidateOptionsMenu();
                 mBluetoothLeService.connect(mDeviceAddress);
                 return true;
             case R.id.menu_disconnect:
+                //手动关闭
+                isInitiativeStop = true;
                 mBluetoothLeService.disconnect();
                 return true;
             case android.R.id.home:
@@ -295,12 +316,12 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
                 this,
                 gattServiceData,
                 android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 },
+                new String[]{LIST_NAME, LIST_UUID},
+                new int[]{android.R.id.text1, android.R.id.text2},
                 gattCharacteristicData,
                 android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 }
+                new String[]{LIST_NAME, LIST_UUID},
+                new int[]{android.R.id.text1, android.R.id.text2}
         );
 
 //        mGattServicesList.setAdapter(gattServiceAdapter);
@@ -318,16 +339,24 @@ public class DeviceControlActivity extends Activity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        if(view.getId()==R.id.btn_factoryTest){
+        if (view.getId() == R.id.btn_factoryTest) {
 
-            if (mGattCharacteristics != null) {
-                //默认工厂
+            if (mGattCharacteristics != null && mGattCharacteristics.size() > 0) {
+                //工厂测试 6/11
                 final BluetoothGattCharacteristic characteristic =
                         mGattCharacteristics.get(6).get(11);
-                final int charaProp = characteristic.getProperties();
-
                 mBluetoothLeService.setCharacteristicNotification(characteristic, true);
             }
+
+        } else if (view.getId() == R.id.btn_heartRateTest) {
+            //心率测量 6/2
+            if (mGattCharacteristics != null && mGattCharacteristics.size() > 0) {
+                //默认工厂
+                final BluetoothGattCharacteristic characteristic =
+                        mGattCharacteristics.get(6).get(2);
+                mBluetoothLeService.setCharacteristicNotification(characteristic, true);
+            }
+
         }
 
 
